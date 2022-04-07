@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 
@@ -9,14 +10,27 @@ import { HomeComponent } from '../home/home.component';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router ) { }
+  user:string;
+  password:string;
+  constructor(private router:Router ) {
+    this.user = '';
+    this.password = '';
+   }
 
   login(){
-    this.router.navigate(['/home']);
+    if(this.user == 'admin@admin.com' && this.password == 'admin'){
+      this.router.navigate(['/home']);
+    }
+    
   }
 
   register(){
     this.router.navigate(['/register']);
+  }
+
+  precargar(){
+    this.user = 'admin@admin.com';
+    this.password = 'admin';
   }
 
   ngOnInit(): void {
