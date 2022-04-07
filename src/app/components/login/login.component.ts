@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/classes/user';
 import { HomeComponent } from '../home/home.component';
 
 @Component({
@@ -10,15 +11,13 @@ import { HomeComponent } from '../home/home.component';
 })
 export class LoginComponent implements OnInit {
 
-  user:string;
-  password:string;
+  user:User;
   constructor(private router:Router ) {
-    this.user = '';
-    this.password = '';
+    this.user = new User();
    }
 
   login(){
-    if(this.user == 'admin@admin.com' && this.password == 'admin'){
+    if(this.user.user == 'admin@admin.com' && this.user.password == 'admin'){
       this.router.navigate(['/home']);
     }
     
@@ -28,10 +27,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  precargar(){
-    this.user = 'admin@admin.com';
-    this.password = 'admin';
-  }
+
 
   ngOnInit(): void {
   }
