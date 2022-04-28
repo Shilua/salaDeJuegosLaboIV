@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { response } from 'express';
 import { User } from 'src/app/classes/user';
+import { AuthLogService } from 'src/app/services/auth-log.service';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { HomeComponent } from '../home/home.component';
 
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   user:User;
   constructor(
     private router:Router,
-    private authServ:AuthServiceService
+    private authServ:AuthServiceService,
+    private logServ: AuthLogService
      ) {
     this.user = new User();
    }
@@ -24,8 +26,15 @@ export class LoginComponent implements OnInit {
   login(){
     this.authServ.onLogin(this.user).then(
       response => {
-        console.log(response);
-        this.router.navigate(['/home']);
+        let fecha = new Date();
+        if(response?.user != null){ 
+          this.logServ.createElement({
+            usuario:this.user.user,
+            fecha: fecha
+          });
+          console.log(response);
+          this.router.navigate(['/home']);
+        }
       }
     ).catch(
       err => {

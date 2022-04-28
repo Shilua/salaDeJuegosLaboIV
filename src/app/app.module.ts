@@ -15,6 +15,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { environment } from 'src/environments/environment';
+import { ToastsContainerComponent } from './components/toasts-container/toasts-container.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { environment } from 'src/environments/environment';
     RegisterComponent,
     HomeComponent,
     QuienSoyComponent,
-    NavbarComponent
+    NavbarComponent,
+    ToastsContainerComponent
   ],
   imports: [
     BrowserModule,

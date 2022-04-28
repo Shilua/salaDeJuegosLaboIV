@@ -17,7 +17,6 @@ export class AuthServiceService {
    }
 
    async onLogin(user:User){
-     console.log(user);
      try {
        return await this.afAuth.signInWithEmailAndPassword(user.user,user.password);
      } catch (error) {
@@ -30,7 +29,7 @@ export class AuthServiceService {
      try {
        return await this.afAuth.createUserWithEmailAndPassword(user.user, user.password);
      } catch (error) {
-       return undefined;
+       return error;
        console.log('error', error);
      }
    }
