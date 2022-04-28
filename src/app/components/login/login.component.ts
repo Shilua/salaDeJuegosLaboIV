@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { response } from 'express';
@@ -6,19 +6,21 @@ import { User } from 'src/app/classes/user';
 import { AuthLogService } from 'src/app/services/auth-log.service';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { HomeComponent } from '../home/home.component';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   user:User;
   constructor(
     private router:Router,
     private authServ:AuthServiceService,
-    private logServ: AuthLogService
+    private logServ: AuthLogService,
+    public toastService: ToastService
      ) {
     this.user = new User();
    }
@@ -54,6 +56,10 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.toastService.clear();
   }
 
 }
